@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  mezzio-swoole-playground:
+    build: .
+    ports:
+      - '9000:9000'
+    volumes:
+      - .:/app
+    logging:
+      options:
+        max-size: 50m
