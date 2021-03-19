@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Command\StartCommandFactory;
 use App\Handler\BarHandler;
 use App\Handler\FooHandler;
 use Laminas\Stdlib\ArrayUtils\MergeReplaceKey;
-use Mezzio\Swoole\Command\StartCommand as MezzioSwooleStartCommand;
 use Mezzio\Swoole\Event\RequestEvent;
 use Mezzio\Swoole\Event\RequestHandlerRequestListener;
 
@@ -28,9 +26,6 @@ class ConfigProvider
             'invokables' => [
                 FooHandler::class => FooHandler::class,
                 BarHandler::class => BarHandler::class,
-            ],
-            'factories'  => [
-                MezzioSwooleStartCommand::class => StartCommandFactory::class,
             ],
         ];
     }
