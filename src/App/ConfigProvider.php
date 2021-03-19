@@ -7,7 +7,10 @@ namespace App;
 use App\Command\StartCommandFactory;
 use App\Handler\BarHandler;
 use App\Handler\FooHandler;
+use Laminas\Stdlib\ArrayUtils\MergeReplaceKey;
 use Mezzio\Swoole\Command\StartCommand as MezzioSwooleStartCommand;
+use Mezzio\Swoole\Event\RequestEvent;
+use Mezzio\Swoole\Event\RequestHandlerRequestListener;
 
 class ConfigProvider
 {
@@ -36,8 +39,15 @@ class ConfigProvider
     {
         return [
             'swoole-http-server' => [
-                'host' => '0.0.0.0',
-                'port' => 9000,
+                'host'      => '0.0.0.0',
+                'port'      => 9000,
+                'listeners' => [
+                    RequestEvent::class => new MergeReplaceKey(
+                        [
+                            RequestHandlerRequestListener::class,
+                        ]
+                    ),
+                ],
             ],
         ];
     }
